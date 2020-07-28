@@ -1,4 +1,4 @@
-class CreateSocialIds < ActiveRecord::Migration
+class CreateSocialIds < ActiveRecord::Migration[5.1]
   def change
     create_table :social_ids do |t|
       t.string :provider, index: true

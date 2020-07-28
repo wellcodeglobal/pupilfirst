@@ -1,4 +1,4 @@
-class RemoveAvailableForConnectAndAvailabilityFromFaculty < ActiveRecord::Migration
+class RemoveAvailableForConnectAndAvailabilityFromFaculty < ActiveRecord::Migration[5.1]
   def up
     remove_columns :faculty, :available_for_connect, :availability
   end

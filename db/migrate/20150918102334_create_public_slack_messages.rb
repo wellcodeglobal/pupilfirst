@@ -1,4 +1,4 @@
-class CreatePublicSlackMessages < ActiveRecord::Migration
+class CreatePublicSlackMessages < ActiveRecord::Migration[5.1]
   def change
     create_table :public_slack_messages do |t|
       t.text :body

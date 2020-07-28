@@ -1,4 +1,4 @@
-class AddUserSmsSentAtToMentorMeeting < ActiveRecord::Migration
+class AddUserSmsSentAtToMentorMeeting < ActiveRecord::Migration[5.1]
   def change
     add_column :mentor_meetings, :user_sms_sent_at, :datetime
   end

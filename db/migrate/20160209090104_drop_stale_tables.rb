@@ -1,4 +1,4 @@
-class DropStaleTables < ActiveRecord::Migration
+class DropStaleTables < ActiveRecord::Migration[5.1]
   def self.up
     drop_table :mentor_meetings
     drop_table :mentor_skills

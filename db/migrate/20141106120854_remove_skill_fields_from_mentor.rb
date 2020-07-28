@@ -1,4 +1,4 @@
-class RemoveSkillFieldsFromMentor < ActiveRecord::Migration
+class RemoveSkillFieldsFromMentor < ActiveRecord::Migration[5.1]
   def up
     remove_column :mentors, :first_skill
     remove_column :mentors, :first_skill_expertise

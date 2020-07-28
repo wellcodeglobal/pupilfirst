@@ -1,4 +1,4 @@
-class AddCollegeIdentificationToUser < ActiveRecord::Migration
+class AddCollegeIdentificationToUser < ActiveRecord::Migration[5.1]
   def change
     add_column :users, :college_identification, :string
   end

@@ -1,4 +1,4 @@
-class CreateResourcesStartups < ActiveRecord::Migration
+class CreateResourcesStartups < ActiveRecord::Migration[5.1]
   def change
     create_table :resources_startups do |t|
       t.integer :resource_id, index: true

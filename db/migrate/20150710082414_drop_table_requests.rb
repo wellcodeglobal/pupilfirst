@@ -1,4 +1,4 @@
-class DropTableRequests < ActiveRecord::Migration
+class DropTableRequests < ActiveRecord::Migration[5.1]
   def up
     drop_table :requests
   end

@@ -1,4 +1,4 @@
-class DropTableBanks < ActiveRecord::Migration
+class DropTableBanks < ActiveRecord::Migration[5.1]
   def up
     drop_table :banks
   end

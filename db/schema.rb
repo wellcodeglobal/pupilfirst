@@ -14,18 +14,17 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
-  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
-  create_table "active_admin_comments", id: :serial, force: :cascade do |t|
+  create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type", null: false
-    t.integer "author_id"
     t.string "author_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "resource_id", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
@@ -53,9 +52,9 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "admin_users", id: :serial, force: :cascade do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "admin_users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "username"
     t.string "fullname"
     t.integer "user_id"
@@ -143,9 +142,9 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["course_id", "community_id"], name: "index_community_course_connection_on_course_id_and_community_id", unique: true
   end
 
-  create_table "connect_requests", id: :serial, force: :cascade do |t|
-    t.integer "connect_slot_id"
-    t.integer "startup_id"
+  create_table "connect_requests", force: :cascade do |t|
+    t.bigint "connect_slot_id"
+    t.bigint "startup_id"
     t.text "questions"
     t.string "status"
     t.string "meeting_link"
@@ -161,8 +160,8 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["startup_id"], name: "index_connect_requests_on_startup_id"
   end
 
-  create_table "connect_slots", id: :serial, force: :cascade do |t|
-    t.integer "faculty_id"
+  create_table "connect_slots", force: :cascade do |t|
+    t.bigint "faculty_id"
     t.datetime "slot_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -219,12 +218,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["school_id"], name: "index_courses_on_school_id"
   end
 
-  create_table "data_migrations", id: false, force: :cascade do |t|
-    t.string "version", null: false
-    t.index ["version"], name: "unique_data_migrations", unique: true
-  end
-
-  create_table "delayed_jobs", id: :serial, force: :cascade do |t|
+  create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
     t.text "handler", null: false
@@ -260,7 +254,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["course_id"], name: "index_evaluation_criteria_on_course_id"
   end
 
-  create_table "faculty", id: :serial, force: :cascade do |t|
+  create_table "faculty", force: :cascade do |t|
     t.string "category"
     t.integer "sort_index"
     t.datetime "created_at", null: false
@@ -298,16 +292,16 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["startup_id", "faculty_id"], name: "index_faculty_startup_enrollments_on_startup_id_and_faculty_id", unique: true
   end
 
-  create_table "features", id: :serial, force: :cascade do |t|
+  create_table "features", force: :cascade do |t|
     t.string "key"
     t.string "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "founders", id: :serial, force: :cascade do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "founders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "startup_id"
     t.string "auth_token"
     t.string "slack_username"
@@ -396,10 +390,10 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["topic_id"], name: "index_posts_on_topic_id"
   end
 
-  create_table "public_slack_messages", id: :serial, force: :cascade do |t|
+  create_table "public_slack_messages", force: :cascade do |t|
     t.text "body"
     t.string "slack_username"
-    t.integer "founder_id"
+    t.bigint "founder_id"
     t.string "channel"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -436,7 +430,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["versionable_type", "versionable_id"], name: "index_resource_versions_on_versionable_type_and_versionable_id"
   end
 
-  create_table "resources", id: :serial, force: :cascade do |t|
+  create_table "resources", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.datetime "created_at", null: false
@@ -490,28 +484,28 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.jsonb "configuration", default: {}, null: false
   end
 
-  create_table "shortened_urls", id: :serial, force: :cascade do |t|
+  create_table "shortened_urls", force: :cascade do |t|
     t.integer "owner_id"
     t.string "owner_type", limit: 20
     t.text "url", null: false
     t.string "unique_key", limit: 100, null: false
     t.integer "use_count", default: 0, null: false
     t.datetime "expires_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["owner_id", "owner_type"], name: "index_shortened_urls_on_owner_id_and_owner_type"
     t.index ["unique_key"], name: "index_shortened_urls_on_unique_key", unique: true
     t.index ["url"], name: "index_shortened_urls_on_url"
   end
 
-  create_table "startup_feedback", id: :serial, force: :cascade do |t|
+  create_table "startup_feedback", force: :cascade do |t|
     t.text "feedback"
     t.string "reference_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "startup_id"
     t.datetime "sent_at"
-    t.integer "faculty_id"
+    t.bigint "faculty_id"
     t.string "activity_type"
     t.string "attachment"
     t.integer "timeline_event_id"
@@ -519,9 +513,9 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["timeline_event_id"], name: "index_startup_feedback_on_timeline_event_id"
   end
 
-  create_table "startups", id: :serial, force: :cascade do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "startups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "name"
     t.string "slug"
     t.integer "level_id"
@@ -531,12 +525,12 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["slug"], name: "index_startups_on_slug", unique: true
   end
 
-  create_table "taggings", id: :serial, force: :cascade do |t|
-    t.integer "tag_id"
-    t.integer "taggable_id"
+  create_table "taggings", force: :cascade do |t|
+    t.bigint "tag_id"
     t.string "taggable_type"
-    t.integer "tagger_id"
+    t.bigint "taggable_id"
     t.string "tagger_type"
+    t.bigint "tagger_id"
     t.string "context", limit: 128
     t.datetime "created_at"
     t.index ["context"], name: "index_taggings_on_context"
@@ -545,12 +539,14 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
     t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
     t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
+    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id"
     t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
     t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
     t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
+    t.index ["tagger_type", "tagger_id"], name: "index_taggings_on_tagger_type_and_tagger_id"
   end
 
-  create_table "tags", id: :serial, force: :cascade do |t|
+  create_table "tags", force: :cascade do |t|
     t.string "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
@@ -599,7 +595,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["target_id"], name: "index_target_versions_on_target_id"
   end
 
-  create_table "targets", id: :serial, force: :cascade do |t|
+  create_table "targets", force: :cascade do |t|
     t.string "role"
     t.string "title"
     t.text "description"
@@ -644,8 +640,8 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["versionable_type", "versionable_id"], name: "index_text_versions_on_versionable_type_and_versionable_id"
   end
 
-  create_table "timeline_event_files", id: :serial, force: :cascade do |t|
-    t.integer "timeline_event_id"
+  create_table "timeline_event_files", force: :cascade do |t|
+    t.bigint "timeline_event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
@@ -671,7 +667,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["timeline_event_id"], name: "index_timeline_event_owners_on_timeline_event_id"
   end
 
-  create_table "timeline_events", id: :serial, force: :cascade do |t|
+  create_table "timeline_events", force: :cascade do |t|
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -705,7 +701,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.index ["user_id"], name: "index_user_activities_on_user_id"
   end
 
-  create_table "users", id: :serial, force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "login_token"
     t.datetime "remember_created_at"
@@ -723,9 +719,9 @@ ActiveRecord::Schema.define(version: 2020_07_16_125836) do
     t.string "title"
     t.text "about"
     t.bigint "school_id"
-    t.jsonb "preferences", default: {"daily_digest"=>true}, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.jsonb "preferences", default: {"daily_digest"=>true}, null: false
     t.string "affiliation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

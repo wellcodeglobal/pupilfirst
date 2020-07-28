@@ -1,4 +1,4 @@
-class CreateBatchApplications < ActiveRecord::Migration
+class CreateBatchApplications < ActiveRecord::Migration[5.1]
   def change
     create_table :batch_applications do |t|
       t.references :batch, index: true

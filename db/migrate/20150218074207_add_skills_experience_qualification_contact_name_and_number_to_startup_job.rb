@@ -1,4 +1,4 @@
-class AddSkillsExperienceQualificationContactNameAndNumberToStartupJob < ActiveRecord::Migration
+class AddSkillsExperienceQualificationContactNameAndNumberToStartupJob < ActiveRecord::Migration[5.1]
   def change
     add_column :startup_jobs, :skills, :string
     add_column :startup_jobs, :experience, :string

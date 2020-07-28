@@ -1,4 +1,4 @@
-class AddSalutationToName < ActiveRecord::Migration
+class AddSalutationToName < ActiveRecord::Migration[5.1]
   def change
     add_column :names, :salutation, :string
   end

@@ -1,4 +1,4 @@
-class RenameSpeField < ActiveRecord::Migration
+class RenameSpeField < ActiveRecord::Migration[5.1]
   def self.up
     remove_column :student_entrepreneur_policies, :university_registeration_number
     add_column :student_entrepreneur_policies, :university_registration_number, :string

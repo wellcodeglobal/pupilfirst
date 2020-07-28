@@ -1,4 +1,4 @@
-class RemoveFieldsFromStartupsAndUsers < ActiveRecord::Migration
+class RemoveFieldsFromStartupsAndUsers < ActiveRecord::Migration[5.1]
   def change
   end
 end

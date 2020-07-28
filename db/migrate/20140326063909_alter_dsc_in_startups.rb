@@ -1,4 +1,4 @@
-class AlterDscInStartups < ActiveRecord::Migration
+class AlterDscInStartups < ActiveRecord::Migration[5.1]
   def self.up
     execute "ALTER TABLE startups ALTER dsc TYPE boolean USING CASE dsc WHEN 'Y' THEN TRUE ELSE FALSE END;"
   end

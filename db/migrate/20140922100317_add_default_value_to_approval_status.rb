@@ -1,4 +1,4 @@
-class AddDefaultValueToApprovalStatus < ActiveRecord::Migration
+class AddDefaultValueToApprovalStatus < ActiveRecord::Migration[5.1]
   def up
     change_column :startups, :approval_status, :string, default: 'unready'
   end

@@ -1,4 +1,4 @@
-class AddAssignerIdToTargetTemplates < ActiveRecord::Migration
+class AddAssignerIdToTargetTemplates < ActiveRecord::Migration[5.1]
   def change
     add_column :target_templates, :assigner_id, :integer
   end

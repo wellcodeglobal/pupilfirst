@@ -1,4 +1,4 @@
-class DropColleges < ActiveRecord::Migration
+class DropColleges < ActiveRecord::Migration[5.1]
   def self.up
     drop_table :colleges
   end

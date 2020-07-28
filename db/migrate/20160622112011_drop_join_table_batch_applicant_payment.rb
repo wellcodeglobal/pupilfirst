@@ -1,4 +1,4 @@
-class DropJoinTableBatchApplicantPayment < ActiveRecord::Migration
+class DropJoinTableBatchApplicantPayment < ActiveRecord::Migration[5.1]
   def up
     drop_join_table :batch_applicants, :payments
   end

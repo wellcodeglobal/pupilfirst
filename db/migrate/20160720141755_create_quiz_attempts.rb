@@ -1,4 +1,4 @@
-class CreateQuizAttempts < ActiveRecord::Migration
+class CreateQuizAttempts < ActiveRecord::Migration[5.1]
   def change
     create_table :quiz_attempts do |t|
       t.integer :course_chapter_id

@@ -1,4 +1,4 @@
-class DropPartnership < ActiveRecord::Migration
+class DropPartnership < ActiveRecord::Migration[5.1]
   def up
     drop_table :partnerships
   end

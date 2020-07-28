@@ -1,5 +1,5 @@
-class DropCompany < ActiveRecord::Migration
+class DropCompany < ActiveRecord::Migration[5.1]
   def change
-  	drop_table :companies
+    ActiveRecord::Base.connection.execute 'drop table if exists companies'
   end
 end
